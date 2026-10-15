@@ -47,13 +47,6 @@ export interface PortfolioConfig {
     icon: string;
     description: string;
   }[];
-  bentoCards: {
-    id: string;
-    title: string;
-    subtitle: string;
-    badge: string;
-    description: string;
-  }[];
 }
 
 export const portfolioConfig: PortfolioConfig = {
@@ -94,63 +87,69 @@ export const portfolioConfig: PortfolioConfig = {
       {
         title: "Direct Kernel USB Transport",
         description:
-          "Circumvents Android AudioTrack and AudioFlinger entirely by communicating directly with the Linux kernel usbfs device nodes via libusb-1.0 asynchronous endpoints.",
+          "Circumvents AudioTrack, AudioFlinger, and vendor audio HAL layers entirely by communicating directly with Linux usbfs device nodes via libusb-1.0 asynchronous endpoints.",
         tag: "Kernel Bypass",
       },
       {
-        title: "Hardware Clock & Rate Negotiation",
+        title: "Hardware Clock Negotiation",
         description:
-          "Controls USB Audio Class 1.0/2.0 (UAC1/UAC2) crystal oscillators directly, matching source sampling rates (44.1kHz - 768kHz, DSD) without OS-forced resamplers.",
+          "Inspects UAC1/UAC2 clock descriptors and commands CS_SAMPLING_FREQ_CONTROL directly at the crystal oscillator, preserving native 44.1 kHz – 384 kHz without 48 kHz resamplers.",
         tag: "Crystal Control",
       },
       {
-        title: "In-Memory PCM Preload & POSIX mlock()",
+        title: "In-Memory PCM Preload",
         description:
-          "Buffers uncompressed audio in dedicated virtual memory pages locked via mlock() to eliminate page faults, Linux kernel swapping, and real-time playback jitter.",
-        tag: "Zero-Jitter",
+          "Decodes FLAC and WAV bitstreams into uncompressed 32-bit linear PCM buffers locked in physical RAM via POSIX mlock() to eliminate page faults and kernel swapping.",
+        tag: "POSIX mlock()",
       },
       {
-        title: "Hardware Feature Unit & True Unity Gain",
+        title: "Hardware Feature Unit Volume",
         description:
-          "Adjusts analog/digital gain directly at the DAC Feature Unit registers, retaining 0 dBFS bit-perfect dynamic range without lossy 16/24-bit software attenuation.",
+          "Implements logarithmic hardware volume attenuation via FU_VOLUME_CONTROL with 0.0 dB true unity gain, preserving exact 0 dBFS dynamic range without digital math distortion.",
         tag: "0 dBFS Native",
       },
       {
         title: "Gapless Streaming Handover",
         description:
-          "Double-buffered circular DMA pipelines feed audio endpoints across track boundaries with sample-accurate continuity and seamless ring buffer swap.",
+          "Secondary background worker pre-decodes the next queued track into RAM, switching audio frames across endpoint boundaries without stream teardown or pops.",
         tag: "Gapless Ring",
+      },
+      {
+        title: "Strict Audiophile Design Scope",
+        description:
+          "Engineered exclusively for external USB-C OTG DACs with lossless FLAC (16/24/32-bit) and WAV. Internal phone speakers and lossy formats (MP3, AAC) are intentionally excluded.",
+        tag: "Bit-Perfect Scope",
       },
     ],
     architecturePoints: [
       {
-        layer: "Userspace / UI",
-        component: "Kotlin Jetpack Compose",
-        impact: "Zero-overhead state management, telemetry graphs, and DAC hardware discovery.",
-        badge: "Zero-Overhead UI",
+        layer: "INTERFACE & HUD",
+        component: "Now Playing HUD & Library (Kotlin)",
+        impact: "Terminal interface with Pac-Man seek bar, dynamic album art palette extraction, hardware volume dial, and hierarchical file browser.",
+        badge: "Kotlin UI & HUD",
       },
       {
-        layer: "JNI Boundary",
-        component: "Modern C++17 Native Bridge",
-        impact: "Direct memory mapping with Android USB Host permission intents.",
-        badge: "Direct Memory Map",
+        layer: "DIAGNOSTICS & JNI",
+        component: "Hardware Telemetry & USB Host Bridge",
+        impact: "Acquires raw Android usbfs file descriptors and provides real-time [LOGS] verification with 1-tap telemetry report export.",
+        badge: "USB Host & Diagnostics",
       },
       {
-        layer: "Core Audio Engine",
-        component: "libusb-1.0 + Asynchronous URBs",
-        impact: "Non-blocking isochronous transfers bypassing Android AudioHAL and mixer pipelines.",
-        badge: "Kernel URB Async",
+        layer: "NATIVE ENGINE",
+        component: "C++17 Audio Engine & POSIX mlock()",
+        impact: "Preloads uncompressed 32-bit PCM into physical RAM locked via mlock() with background gapless track handover.",
+        badge: "C++17 & mlock()",
       },
       {
-        layer: "Hardware Layer",
-        component: "External USB DAC / UAC2 Interface",
-        impact: "Native hardware crystal master clocking with pure bit-for-bit PCM bitstream.",
-        badge: "Bit-Perfect Clock",
+        layer: "KERNEL TRANSPORT",
+        component: "libusb-1.0 & UAC2 Hardware Clocking",
+        impact: "Asynchronous Isochronous USB transfers with direct CS_SAMPLING_FREQ_CONTROL oscillator negotiation and 0.0 dB hardware unity gain.",
+        badge: "libusb-1.0 & UAC2",
       },
     ],
     hardwareTelemetry: [
-      { label: "Sample Rate", value: "384.0", unit: "kHz", subtext: "Bit-perfect native UAC2" },
-      { label: "Bit Depth", value: "32", unit: "bit", subtext: "Integer PCM direct output" },
+      { label: "Sample Rate", value: "384.0", unit: "kHz", subtext: "Bit-perfect native UAC1/UAC2" },
+      { label: "Bit Depth", value: "32", unit: "bit", subtext: "Integer / Float Linear PCM" },
       { label: "Buffer Latency", value: "1.2", unit: "ms", subtext: "Isochronous transfer rate" },
       { label: "Kernel Swapping", value: "0", unit: "%", subtext: "POSIX mlock() pinned pages" },
     ],
@@ -211,32 +210,6 @@ export const portfolioConfig: PortfolioConfig = {
       proficiency: "Workflow",
       icon: "GitBranch",
       description: "Version control, managing open-source releases, and documenting code cleanly.",
-    },
-  ],
-  bentoCards: [
-    {
-      id: "systems-mindset",
-      title: "Linux & Systems Mindset",
-      subtitle: "Kernel-level rigor meets user experience",
-      badge: "Kernel / usbfs",
-      description:
-        "Deep enthusiasm for deterministic performance, memory safety, and direct hardware interfacing. Not afraid to bypass high-level abstractions when fidelity requires it.",
-    },
-    {
-      id: "creative-fullstack",
-      title: "Full-Stack & Creative Range",
-      subtitle: "From C drivers to fluid WebGL/React UIs",
-      badge: "Next.js / Laravel",
-      description:
-        "Bridging low-level systems programming with high-level web craftsmanship. Pixel-perfect layouts, silky physics, and robust backend endpoints.",
-    },
-    {
-      id: "open-source-rd",
-      title: "R&D & Open Source",
-      subtitle: "Building tooling for the community",
-      badge: "Active R&D",
-      description:
-        "Constantly researching audio transports, DSP filters, direct memory DMA, and exploring modern systems languages like Rust for future utilities.",
     },
   ],
 };

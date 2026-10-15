@@ -8,7 +8,6 @@ import { MagneticButton } from "@/components/MagneticButton";
 import {
   Copy,
   Check,
-  Disc3,
   Activity,
   ShieldCheck,
   Zap,
@@ -22,7 +21,7 @@ interface FeaturedProjectProps {
 }
 
 export function FeaturedProject({ release }: FeaturedProjectProps) {
-  const { flagship, bentoCards } = portfolioConfig;
+  const { flagship } = portfolioConfig;
   const [activeTab, setActiveTab] = useState<"architecture" | "telemetry" | "install">("architecture");
   const [copiedClone, setCopiedClone] = useState(false);
 
@@ -341,25 +340,6 @@ export function FeaturedProject({ release }: FeaturedProjectProps) {
             </SpotlightCard>
           ))}
         </div>
-      </div>
-
-      {/* Supporting Bento Asymmetric Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {bentoCards.map((card) => (
-          <SpotlightCard key={card.id} className="flex flex-col justify-between p-6">
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/[0.04] text-zinc-400 border border-white/[0.08]">
-                  {card.badge}
-                </span>
-                <Disc3 className="w-3.5 h-3.5 text-zinc-500" />
-              </div>
-              <h4 className="text-base font-semibold text-white mb-1">{card.title}</h4>
-              <p className="text-xs font-mono text-zinc-400 mb-3">{card.subtitle}</p>
-              <p className="text-xs text-zinc-400 leading-relaxed">{card.description}</p>
-            </div>
-          </SpotlightCard>
-        ))}
       </div>
     </section>
   );

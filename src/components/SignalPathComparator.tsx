@@ -19,7 +19,7 @@ export function SignalPathComparator() {
   ];
 
   const tsrossaStages = [
-    { title: "FLAC/WAV Source", note: "Pure Bitstream (up to 384kHz/DSD)", status: "input" },
+    { title: "FLAC/WAV Source", note: "Pure Bitstream (up to 384kHz)", status: "input" },
     { title: "Linear PCM Preload", note: "Zero Page Faults · POSIX mlock()", status: "good" },
     { title: "C++17 libusb / usbfs", note: "Direct Linux Kernel Endpoint", status: "good" },
     { title: "UAC2 Hardware Clock", note: "Native 44.1 - 384 kHz Sync", status: "good" },
