@@ -30,23 +30,23 @@ export function SignalPathComparator() {
   const stages = mode === "tsrossa" ? tsrossaStages : standardStages;
 
   return (
-    <div className="w-full mt-10 rounded-2xl border border-white/[0.08] bg-black/60 p-5 sm:p-6 backdrop-blur-md">
+    <div className="w-full mt-8 sm:mt-10 rounded-2xl border border-white/[0.08] bg-black/60 p-4 sm:p-6 backdrop-blur-md">
       {/* Comparator Header & Switcher */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-white/[0.06]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3.5 sm:gap-4 pb-4 sm:pb-5 border-b border-white/[0.06]">
         <div>
           <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-500 block mb-1">
             [ SIGNAL PATH COMPARATOR · KERNEL BENCHMARK ]
           </span>
-          <h4 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+          <h4 className="text-sm sm:text-lg font-bold text-white flex items-center gap-2">
             <span>Audio Transport Architecture Pipeline</span>
           </h4>
         </div>
 
         {/* Dual Mode Switcher Pill */}
-        <div className="flex items-center p-1 rounded-full bg-white/[0.04] border border-white/[0.08]">
+        <div className="flex items-center p-0.5 sm:p-1 rounded-full bg-white/[0.04] border border-white/[0.08] shrink-0">
           <button
             onClick={() => setMode("tsrossa")}
-            className={`relative px-3.5 py-1.5 rounded-full text-xs font-mono transition-colors flex items-center gap-1.5 ${
+            className={`relative px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs font-mono transition-colors flex items-center gap-1.5 ${
               mode === "tsrossa" ? "text-white" : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
@@ -59,13 +59,13 @@ export function SignalPathComparator() {
             )}
             <span className="relative z-10 flex items-center gap-1.5 text-cyan-300">
               <Zap className="w-3.5 h-3.5 text-cyan-400" />
-              tsrossa Engine
+              <span className="text-xs">tsrossa Engine</span>
             </span>
           </button>
 
           <button
             onClick={() => setMode("standard")}
-            className={`relative px-3.5 py-1.5 rounded-full text-xs font-mono transition-colors flex items-center gap-1.5 ${
+            className={`relative px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs font-mono transition-colors flex items-center gap-1.5 ${
               mode === "standard" ? "text-white" : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
@@ -78,64 +78,74 @@ export function SignalPathComparator() {
             )}
             <span className="relative z-10 flex items-center gap-1.5 text-amber-300">
               <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
-              Standard Android
+              <span className="text-xs">Standard Android</span>
             </span>
           </button>
         </div>
       </div>
 
       {/* Signal Flow Stage Graph */}
-      <div className="py-6 overflow-x-auto scrollbar-thin">
-        <div className="min-w-[700px] flex items-center justify-between gap-2">
-          {stages.map((stage, idx) => (
-            <React.Fragment key={stage.title}>
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.05, duration: 0.25 }}
-                className={`flex-1 p-3.5 rounded-xl border flex flex-col justify-between min-h-[96px] ${
-                  mode === "tsrossa"
-                    ? "bg-cyan-950/20 border-cyan-500/25 hover:border-cyan-400/50"
-                    : "bg-red-950/20 border-red-500/25 hover:border-red-400/50"
-                } transition-colors`}
-              >
-                <div>
-                  <span className="text-[9px] font-mono uppercase tracking-wider text-zinc-500 block mb-1">
-                    0{idx + 1} {"//"} STAGE
-                  </span>
+      <div className="py-4 sm:py-6">
+        {/* Mobile Swipe Affordance Hint */}
+        <div className="flex sm:hidden items-center justify-between text-[10px] font-mono text-zinc-500 mb-2 px-1">
+          <span>Stages (01-06)</span>
+          <span className="flex items-center gap-1 text-cyan-400">
+            Swipe to inspect pipeline →
+          </span>
+        </div>
+
+        <div className="overflow-x-auto pb-2 scrollbar-thin">
+          <div className="min-w-[680px] flex items-center justify-between gap-2">
+            {stages.map((stage, idx) => (
+              <React.Fragment key={stage.title}>
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.05, duration: 0.25 }}
+                  className={`flex-1 p-3.5 rounded-xl border flex flex-col justify-between min-h-[96px] ${
+                    mode === "tsrossa"
+                      ? "bg-cyan-950/20 border-cyan-500/25 hover:border-cyan-400/50"
+                      : "bg-red-950/20 border-red-500/25 hover:border-red-400/50"
+                  } transition-colors`}
+                >
+                  <div>
+                    <span className="text-[9px] font-mono uppercase tracking-wider text-zinc-500 block mb-1">
+                      0{idx + 1} {"//"} STAGE
+                    </span>
+                    <div
+                      className={`text-xs font-semibold ${
+                        mode === "tsrossa" ? "text-zinc-100" : "text-zinc-300"
+                      }`}
+                    >
+                      {stage.title}
+                    </div>
+                  </div>
                   <div
-                    className={`text-xs font-semibold ${
-                      mode === "tsrossa" ? "text-zinc-100" : "text-zinc-300"
+                    className={`text-[10px] font-mono leading-tight mt-2 ${
+                      mode === "tsrossa" ? "text-cyan-400/80" : "text-amber-400/80"
                     }`}
                   >
-                    {stage.title}
+                    {stage.note}
                   </div>
-                </div>
-                <div
-                  className={`text-[10px] font-mono leading-tight mt-2 ${
-                    mode === "tsrossa" ? "text-cyan-400/80" : "text-amber-400/80"
-                  }`}
-                >
-                  {stage.note}
-                </div>
-              </motion.div>
+                </motion.div>
 
-              {idx < stages.length - 1 && (
-                <div className="shrink-0 px-1 text-zinc-600">
-                  <ArrowRight
-                    className={`w-3.5 h-3.5 ${
-                      mode === "tsrossa" ? "text-cyan-400/60" : "text-amber-500/60"
-                    }`}
-                  />
-                </div>
-              )}
-            </React.Fragment>
-          ))}
+                {idx < stages.length - 1 && (
+                  <div className="shrink-0 px-1 text-zinc-600">
+                    <ArrowRight
+                      className={`w-3.5 h-3.5 ${
+                        mode === "tsrossa" ? "text-cyan-400/60" : "text-amber-500/60"
+                      }`}
+                    />
+                  </div>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Metric Deltas & Architectural Impact */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-white/[0.06]">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-4 border-t border-white/[0.06]">
         <div className="p-3 rounded-xl bg-zinc-950/60 border border-white/[0.05]">
           <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 block mb-1">
             Sample Rate Conversion (SRC)

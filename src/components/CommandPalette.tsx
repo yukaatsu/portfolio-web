@@ -79,7 +79,7 @@ export function CommandPalette({ open, onOpenChange, onSelectTab }: CommandPalet
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-black/70 backdrop-blur-md animate-in fade-in-0 duration-200">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-8 sm:pt-16 md:pt-24 px-3 sm:px-4 bg-black/70 backdrop-blur-md animate-in fade-in-0 duration-200 overflow-y-auto">
       <div
         className="fixed inset-0"
         onClick={() => onOpenChange(false)}
@@ -89,7 +89,7 @@ export function CommandPalette({ open, onOpenChange, onSelectTab }: CommandPalet
         role="dialog"
         aria-modal="true"
         aria-label="Command Palette"
-        className="relative w-full max-w-xl overflow-hidden rounded-2xl liquid-glass-core border border-white/12 shadow-2xl shadow-black/90"
+        className="relative w-full max-w-xl max-h-[85dvh] flex flex-col overflow-hidden rounded-2xl liquid-glass-core border border-white/12 shadow-2xl shadow-black/90 my-auto sm:my-0"
       >
         {/* Specular incident rim */}
         <div className="pointer-events-none absolute inset-x-6 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent" />
@@ -115,7 +115,7 @@ export function CommandPalette({ open, onOpenChange, onSelectTab }: CommandPalet
             </button>
           </div>
 
-          <Command.List className="max-h-80 overflow-y-auto p-2 scrollbar-thin">
+          <Command.List className="max-h-[50dvh] sm:max-h-80 overflow-y-auto p-2 scrollbar-thin">
             <Command.Empty className="py-6 text-center text-xs text-zinc-500">
               No results found.
             </Command.Empty>

@@ -62,12 +62,13 @@ export function MagneticButton({
   );
 
   if (href) {
+    const isFullWidth = className?.includes("w-full");
     return (
       <a
         href={href}
         target={target}
         rel={rel ?? (target === "_blank" ? "noopener noreferrer" : undefined)}
-        className="inline-block"
+        className={cn("inline-block", isFullWidth && "w-full")}
       >
         {content}
       </a>

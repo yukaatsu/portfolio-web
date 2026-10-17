@@ -38,13 +38,13 @@ export function TechStack() {
       : techStack.filter((item) => item.category === activeCategory);
 
   return (
-    <section id="tech-stack" className="py-24 px-4 md:px-8 max-w-6xl mx-auto">
+    <section id="tech-stack" className="py-14 sm:py-20 md:py-24 px-4 md:px-8 max-w-6xl mx-auto">
       {/* Section Header */}
-      <div className="flex flex-col items-start mb-12">
+      <div className="flex flex-col items-start mb-8 sm:mb-12">
         <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-zinc-500 mb-2">
           [ STACK & TOOLS ]
         </span>
-        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-3">
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-2.5 sm:mb-3">
           Languages, Frameworks & Environment
         </h2>
         <p className="text-zinc-400 text-sm sm:text-base max-w-xl">
@@ -53,12 +53,12 @@ export function TechStack() {
       </div>
 
       {/* Category Filter Tabs */}
-      <div className="flex flex-wrap gap-2 mb-10">
+      <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-8 sm:mb-10">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`relative px-4 py-2 rounded-full text-xs font-mono transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1017] ${
+            className={`relative px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-mono transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1017] ${
               activeCategory === cat
                 ? "text-white"
                 : "text-zinc-400 hover:text-zinc-200 bg-zinc-950/60 border border-white/[0.06]"
@@ -77,7 +77,7 @@ export function TechStack() {
       </div>
 
       {/* Filterable Grid */}
-      <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         <AnimatePresence>
           {filteredTech.map((tech, idx) => (
             <motion.div
@@ -114,7 +114,7 @@ export function TechStack() {
                   </div>
 
                   {/* Technology Description with Natural Flow */}
-                  <p className="text-xs text-zinc-400 leading-relaxed mb-3 min-h-[3.75rem] flex-1">
+                  <p className="text-xs text-zinc-400 leading-relaxed mb-3 min-h-[auto] sm:min-h-[3.75rem] flex-1">
                     {tech.description}
                   </p>
                 </div>

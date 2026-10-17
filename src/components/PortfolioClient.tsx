@@ -60,7 +60,7 @@ export function PortfolioClient({ initialRelease }: PortfolioClientProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="flex flex-col pt-20"
+              className="flex flex-col pt-12 sm:pt-16 md:pt-20"
             >
               {/* Flagship Case Study (tsrossa) with Live GitHub Release */}
               <FeaturedProject release={initialRelease} />

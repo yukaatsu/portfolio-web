@@ -24,6 +24,9 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   selection-background-color: rgba(56, 189, 248, 0.25);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  -webkit-tap-highlight-color: transparent;
 }
 
 ::selection {

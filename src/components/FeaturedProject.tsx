@@ -40,13 +40,13 @@ export function FeaturedProject({ release }: FeaturedProjectProps) {
   };
 
   return (
-    <section id="flagship" className="py-24 px-4 md:px-8 max-w-6xl mx-auto">
+    <section id="flagship" className="py-14 sm:py-20 md:py-24 px-4 md:px-8 max-w-6xl mx-auto">
       {/* Editorial Section Header */}
-      <div className="flex flex-col items-start mb-12">
+      <div className="flex flex-col items-start mb-8 sm:mb-12">
         <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-zinc-500 mb-2">
           [ FLAGSHIP CASE STUDY · KERNEL AUDIO ]
         </span>
-        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-3">
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-2 sm:mb-3">
           {flagship.title}
         </h2>
         <p className="text-zinc-400 text-sm sm:text-base max-w-2xl leading-relaxed">
@@ -55,14 +55,14 @@ export function FeaturedProject({ release }: FeaturedProjectProps) {
       </div>
 
       {/* Main Double-Bezel Showcase Panel */}
-      <SpotlightCard className="mb-14 p-6 sm:p-10">
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-8 pb-8 border-b border-white/[0.06]">
-          <div className="space-y-4 max-w-2xl">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="text-3xl font-mono font-bold text-white tracking-wider">
+      <SpotlightCard className="mb-10 sm:mb-14 p-4 sm:p-8 md:p-10">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-6 sm:gap-8 pb-6 sm:pb-8 border-b border-white/[0.06]">
+          <div className="space-y-4 max-w-2xl w-full">
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+              <span className="text-2xl sm:text-3xl font-mono font-bold text-white tracking-wider">
                 {flagship.title}
               </span>
-              <span className="px-3 py-1 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-medium flex items-center gap-2">
+              <span className="px-2.5 sm:px-3 py-1 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-medium flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 {displayVersion}
               </span>
@@ -95,7 +95,7 @@ export function FeaturedProject({ release }: FeaturedProjectProps) {
                   />
                 ))}
               </div>
-              <div className="flex flex-wrap gap-4 mt-3 text-xs font-mono text-zinc-400">
+              <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-3 text-xs font-mono text-zinc-400">
                 {flagship.languageBreakdown.map((lang) => (
                   <div key={lang.name} className="flex items-center gap-1.5">
                     <span
@@ -111,16 +111,16 @@ export function FeaturedProject({ release }: FeaturedProjectProps) {
             </div>
           </div>
 
-          {/* Action CTAs (Island Button Architecture) */}
-          <div className="flex flex-wrap lg:flex-col gap-3 w-full lg:w-auto">
+          {/* Action CTAs (Island Button Architecture: horizontal row on tablet, column on desktop) */}
+          <div className="flex flex-col sm:flex-row lg:flex-col gap-2.5 sm:gap-3 w-full lg:w-auto shrink-0">
             {apkDownloadUrl && (
               <MagneticButton
                 href={apkDownloadUrl}
                 target="_blank"
-                className="w-full justify-between rounded-full bg-zinc-100 pl-5 pr-2 py-2 text-xs sm:text-sm font-semibold text-zinc-950 shadow-lg shadow-white/5 hover:bg-white"
+                className="w-full sm:flex-1 lg:w-64 justify-between rounded-full bg-zinc-100 pl-4 sm:pl-5 pr-2 py-2 text-xs sm:text-sm font-semibold text-zinc-950 shadow-lg shadow-white/5 hover:bg-white"
               >
                 <span>Download APK {release?.apkSizeMb ? `(${release.apkSizeMb} MB)` : ""}</span>
-                <span className="w-8 h-8 rounded-full bg-zinc-950 text-white flex items-center justify-center transition-transform group-hover:scale-105 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-zinc-950 text-white flex items-center justify-center transition-transform group-hover:scale-105 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </span>
               </MagneticButton>
@@ -128,20 +128,20 @@ export function FeaturedProject({ release }: FeaturedProjectProps) {
             <MagneticButton
               href={releasesUrl}
               target="_blank"
-              className="w-full justify-between rounded-full border border-white/10 bg-zinc-900/80 pl-5 pr-2 py-2 text-xs sm:text-sm font-medium text-zinc-300 hover:border-white/20 hover:text-white"
+              className="w-full sm:flex-1 lg:w-64 justify-between rounded-full border border-white/10 bg-zinc-900/80 pl-4 sm:pl-5 pr-2 py-2 text-xs sm:text-sm font-medium text-zinc-300 hover:border-white/20 hover:text-white"
             >
               <span>Release & Notes</span>
-              <span className="w-8 h-8 rounded-full bg-white/[0.06] text-zinc-300 flex items-center justify-center transition-transform group-hover:scale-105 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/[0.06] text-zinc-300 flex items-center justify-center transition-transform group-hover:scale-105 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </span>
             </MagneticButton>
             <MagneticButton
               href={flagship.repoUrl}
               target="_blank"
-              className="w-full justify-between rounded-full border border-white/10 bg-zinc-900/80 pl-5 pr-2 py-2 text-xs sm:text-sm font-medium text-zinc-300 hover:border-white/20 hover:text-white"
+              className="w-full sm:flex-1 lg:w-64 justify-between rounded-full border border-white/10 bg-zinc-900/80 pl-4 sm:pl-5 pr-2 py-2 text-xs sm:text-sm font-medium text-zinc-300 hover:border-white/20 hover:text-white"
             >
               <span>Source Repository</span>
-              <span className="w-8 h-8 rounded-full bg-white/[0.06] text-zinc-300 flex items-center justify-center transition-transform group-hover:scale-105 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/[0.06] text-zinc-300 flex items-center justify-center transition-transform group-hover:scale-105 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </span>
             </MagneticButton>
@@ -149,18 +149,18 @@ export function FeaturedProject({ release }: FeaturedProjectProps) {
         </div>
 
         {/* Interactive Tab Switcher (Harmonized Liquid Glass Track) */}
-        <div className="pt-8">
-          <div className="flex flex-wrap gap-2 p-1 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm max-w-lg mb-8">
+        <div className="pt-6 sm:pt-8">
+          <div className="flex flex-wrap sm:flex-nowrap gap-1 sm:gap-2 p-1 rounded-xl sm:rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm max-w-md sm:max-w-lg mb-6 sm:mb-8">
             <button
               onClick={() => setActiveTab("architecture")}
-              className={`relative flex-1 py-2 px-3 rounded-full text-xs font-mono transition-colors ${
+              className={`relative flex-1 py-1.5 sm:py-2 px-2.5 sm:px-3 rounded-lg sm:rounded-full text-xs font-mono transition-colors text-center ${
                 activeTab === "architecture" ? "text-white" : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
               {activeTab === "architecture" && (
                 <motion.div
                   layoutId="activeTabPill"
-                  className="absolute inset-0 rounded-full bg-white/[0.12] border border-white/[0.18] shadow-sm"
+                  className="absolute inset-0 rounded-lg sm:rounded-full bg-white/[0.12] border border-white/[0.18] shadow-sm"
                   transition={{ type: "spring", stiffness: 350, damping: 30 }}
                 />
               )}
@@ -169,34 +169,36 @@ export function FeaturedProject({ release }: FeaturedProjectProps) {
 
             <button
               onClick={() => setActiveTab("telemetry")}
-              className={`relative flex-1 py-2 px-3 rounded-full text-xs font-mono transition-colors ${
+              className={`relative flex-1 py-1.5 sm:py-2 px-2.5 sm:px-3 rounded-lg sm:rounded-full text-xs font-mono transition-colors text-center ${
                 activeTab === "telemetry" ? "text-white" : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
               {activeTab === "telemetry" && (
                 <motion.div
                   layoutId="activeTabPill"
-                  className="absolute inset-0 rounded-full bg-white/[0.1] border border-white/[0.15]"
+                  className="absolute inset-0 rounded-lg sm:rounded-full bg-white/[0.1] border border-white/[0.15]"
                   transition={{ type: "spring", stiffness: 350, damping: 30 }}
                 />
               )}
-              <span className="relative z-10">Hardware Telemetry</span>
+              <span className="relative z-10 hidden sm:inline">Hardware Telemetry</span>
+              <span className="relative z-10 sm:hidden">Telemetry</span>
             </button>
 
             <button
               onClick={() => setActiveTab("install")}
-              className={`relative flex-1 py-2 px-3 rounded-full text-xs font-mono transition-colors ${
+              className={`relative flex-1 py-1.5 sm:py-2 px-2.5 sm:px-3 rounded-lg sm:rounded-full text-xs font-mono transition-colors text-center ${
                 activeTab === "install" ? "text-white" : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
               {activeTab === "install" && (
                 <motion.div
                   layoutId="activeTabPill"
-                  className="absolute inset-0 rounded-full bg-white/[0.1] border border-white/[0.15]"
+                  className="absolute inset-0 rounded-lg sm:rounded-full bg-white/[0.1] border border-white/[0.15]"
                   transition={{ type: "spring", stiffness: 350, damping: 30 }}
                 />
               )}
-              <span className="relative z-10">Terminal & Clone</span>
+              <span className="relative z-10 hidden sm:inline">Terminal & Clone</span>
+              <span className="relative z-10 sm:hidden">Install</span>
             </button>
           </div>
 
@@ -274,18 +276,18 @@ export function FeaturedProject({ release }: FeaturedProjectProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.25 }}
-                className="rounded-2xl border border-white/[0.08] bg-black/90 p-5 font-mono text-xs"
+                className="rounded-2xl border border-white/[0.08] bg-black/90 p-4 sm:p-5 font-mono text-xs"
               >
-                <div className="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-                    <span className="text-zinc-500 ml-2">bash — tsrossa build & clone</span>
+                <div className="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4 gap-2">
+                  <div className="flex items-center gap-2 truncate">
+                    <span className="w-2.5 h-2.5 rounded-full bg-zinc-700 shrink-0" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-zinc-700 shrink-0" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-zinc-700 shrink-0" />
+                    <span className="text-zinc-500 ml-1.5 truncate text-[11px] sm:text-xs">bash — tsrossa build & clone</span>
                   </div>
                   <button
                     onClick={handleCopyClone}
-                    className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors border border-white/10"
+                    className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors border border-white/10 shrink-0 text-[11px] sm:text-xs"
                   >
                     {copiedClone ? (
                       <>
@@ -300,9 +302,9 @@ export function FeaturedProject({ release }: FeaturedProjectProps) {
                     )}
                   </button>
                 </div>
-                <div className="space-y-1.5 text-zinc-300">
+                <div className="space-y-1.5 text-zinc-300 text-[11px] sm:text-xs overflow-x-auto">
                   <p className="text-zinc-500"># 1. Clone repository with native submodules</p>
-                  <p className="text-zinc-100">{cloneCommand}</p>
+                  <p className="text-zinc-100 whitespace-nowrap">{cloneCommand}</p>
                   <p className="text-zinc-500 mt-3"># 2. Build native NDK libs & assemble APK</p>
                   <p>cd tsrossa</p>
                   <p>./gradlew assembleRelease</p>
